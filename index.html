@@ -19,8 +19,8 @@
     </section>
 
     <section class="main-content">
-      <h1>
-<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction</h1>
+      <h2>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction</h2>
 
 <p>Here, i am describes about :</p>
 
@@ -28,14 +28,76 @@
 <li>How to send Notification from your application.</li>
 <li>How to Customize the Notification.</li>
 <li>How to add Action Button in Notification.</li>
-<li>How to implemented Explict Intent in Notification.</li>
-<li>How to implemented Implicit Intent in Notification.</li>
+<li>How to implemented Explicit Intent in Notification.</li>
+<li>
+<p>How to implemented Implicit Intent in Notification.</p>
+
+<pre><code>`// Set Notification Title
+String strTitle = "You Got New Notification.";
+// Set Notification Text
+String strText = "Hi,How are You?";
+
+//This is the proper solution for Open Some Activity  after clicking the action in notification
+
+// Open InfoActivity Class on "Info" Button Click
+Intent intentInfo = new Intent(this, InfoActivity.class);
+// Send data to InfoActivity Class
+intentInfo.putExtra("title", strTitle);
+intentInfo.putExtra("text", strText);
+// Open InfoActivity.java Activity
+PendingIntent pIntentInfo = PendingIntent.getActivity(this, 0, intentInfo, PendingIntent.FLAG_UPDATE_CURRENT);
+
+//This is the proper solution for dismiss the dialog
+
+//Create an Intent for the BroadcastReceiver
+Intent intentDismiss = new Intent(context, HandleBroadcastReceiver.class);
+//Create the PendingIntent
+PendingIntent pIntentDismiss = PendingIntent.getBroadcast(context, 0, intentDismiss, 0);
+
+//Create Notification using NotificationCompat.Builder
+NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+        // Set Icon
+        .setSmallIcon(R.drawable.ic_launcher)
+
+        // Set Title
+        .setContentTitle(strTitle)
+        // Set Text
+        .setContentText(strText)
+        // Add an Action Button below Notification
+        .addAction(android.R.drawable.ic_menu_close_clear_cancel, "Dismiss", pIntentDismiss)
+        .addAction(android.R.drawable.ic_menu_info_details, "Info", pIntentInfo)
+        // Set PendingIntent into Notification
+        .setContentIntent(pIntentDismiss)
+        // showing action button on notification
+        .setPriority(Notification.PRIORITY_MAX)
+        .setWhen(0)
+        .setColor(0x0079c0)
+        /* Increase notification number every time a new notification arrives */
+        .setNumber(++numMessages)
+
+        // Dismiss Notification
+        .setAutoCancel(true);
+
+// Create Notification Manager
+NotificationManager notificationmanager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+// Build Notification with Notification Manager
+notificationmanager.notify(0, builder.build());`
+</code></pre>
+</li>
 </ul>
 
-<h1>
-<a id="output" class="anchor" href="#output" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Output</h1>
+<h2>
+<a id="output" class="anchor" href="#output" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Output</h2>
 
 <p><img src="https://github.com/Priyanka-Mohanty/Android-Custom-Notification/blob/master/Images/Screenshot_20160630-114831.png" alt="First Screen"></p>
+
+<p><img src="https://github.com/Priyanka-Mohanty/Android-Custom-Notification/blob/master/Images/Screenshot_20160630-114936.png" alt="Second Screen "></p>
+
+<p><img src="https://github.com/Priyanka-Mohanty/Android-Custom-Notification/blob/master/Images/Screenshot_20160630-114849.png" alt="Third Screen"><img src="https://github.com/Priyanka-Mohanty/Android-Custom-Notification/blob/master/Images/Screenshot_20160630-114908.png" alt="Fourth Screen"></p>
+
+<p><img src="https://github.com/Priyanka-Mohanty/Android-Custom-Notification/blob/master/Images/Screenshot_20160630-114944.png" alt="Fifth Screen"><img src="https://github.com/Priyanka-Mohanty/Android-Custom-Notification/blob/master/Images/Screenshot_20160630-115003.png" alt="Sixth Screen"></p>
+
+<p><img src="https://github.com/Priyanka-Mohanty/Android-Custom-Notification/blob/master/Images/Screenshot_20160630-115008.png" alt="Seven Screen"></p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/Priyanka-Mohanty/Android-Custom-Notification">Android-custom-notification</a> is maintained by <a href="https://github.com/Priyanka-Mohanty">Priyanka-Mohanty</a>.</span>
