@@ -1,4 +1,3 @@
-Welcome to the Android-Custom-Notification.
 
 # Introduction
 
