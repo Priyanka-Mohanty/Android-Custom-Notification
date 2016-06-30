@@ -1,0 +1,6 @@
+{
+  "name": "Android-custom-notification",
+  "tagline": "#Android #Notification #Push Notification # Custom Notification #BroadCastReceiver #Call #SMS ",
+  "body": "# Introduction\r\n\r\nHere, i am describes about :\r\n\r\n* How to send Notification from your application.\r\n* How to Customize the Notification.\r\n* How to add Action Button in Notification.\r\n* How to implemented Explict Intent in Notification.\r\n* How to implemented Implicit Intent in Notification.\r\n\r\n# Output\r\n\r\n![First Screen](https://github.com/Priyanka-Mohanty/Android-Custom-Notification/blob/master/Images/Screenshot_20160630-114831.png)\r\n\r\n\r\n\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
